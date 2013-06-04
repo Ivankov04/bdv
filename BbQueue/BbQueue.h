@@ -1,80 +1,4 @@
-/**
- *  @author	 :   Spl3en
- *  @file	   :   BbQueue.h
- *  @version	:   1.8
- *
- *  BbQueue fournit des fonctions de file et de pile.
- *  Elle permet de manière simple et efficace d'ajouter ou de retirer un élément d'une liste.
- *
- *  Sa manière d'utilisation est double :
- *	  - Il est possible de l'utiliser comme une file/pile, via bbq_add / bbq_push / bbq_pop et ses dérivées
- *	  - Il est possible de l'utiliser comme une liste doublement chaînée, en récupérant tout d'abord le BbChild correspondant via bb_queue_pick_child et dérivées
- *	  Ainsi, les accesseurs bb_child_get_next/_prev sont disponibles, et les données pointées par ses childs par ->data.
- *	  A noter que __bb_child_get_next/_prev sont plus rapides, mais crashera le programme si le BbChild passé en paramètre est invalide (pas de check).
- *
- *	Changelog :
- *
- *		[+] v1.1 :		(10 / 11 / 2010)
- *			[ADD]	   bb_queue_remv_nth (BbQueue *, int nth)
- *			[ADD]	   bb_queue_get_nth  (BbQueue *, int nth)
- *		  [FIX]	   bb_queue_remv : Length fixed
- *
- *	  [+] v1.2		(18 / 11 / 2010)
- *		  [ADD]	   La structure contient maintenant deux nouveau éléments : index et current
- *					  - index est un simple entier; Il est modifiable à la convenance de l'utilisateur. Il est utile quand il faut se rappeler de l'index d'un élément.
- *					  - current est un pointeur sur le dernier BbChild pické.
- *					  Il est utile dans le cas où l'on voudrait accéder au BbChild suivant via q->current->next sans devoir utiliser bb_queue_pick_nth,
- *					  dans le cas où le pointeur sur BbChild serait perdu.
- *
- *		  [ADD]	   bb_queue_get_current (BbQueue *queue) : retourne la data pointé par le BbChild current de façon propre, ou NULL s'il n'existe pas
- *					  bb_queue_pick_next (BbQueue *queue, int refresh) : Retourne la data pointé par le BbChild suivant du current. refresh sert à spécifier si le pointeur courant doit être actualisé ou non
- *					  bb_queue_pick_prev (BbQueue *queue, int refresh) : idem que bb_queue_get_next pour le BbChild précédent.
- *
- *		  [ADD]	   bb_queue_free_all (BbQueue *queue, (void *) free_func()); : Permet de libérer la mémoire de la BbQueue ainsi que celle des éléments enfilés.
- *					  Il s'agit de la fonction la plus efficace pour effacer l'ensemble des données liées à la BbQueue.
- *
- *	  [+] v1.3		(03 / 12 / 2010)
- *		  [ADD]	   bb_queue_do (BbQueue *queue, void (* do_func)()) : Permet d'effectuer une fonction sur l'ensemble de tous les éléments de la BbQueue
- *		  [ADD]	   bb_queue_replace_nth : Remplace une data par une autre à un index fixé, et renvoie celle removée
- *		  [ADD]	   bb_queue_replace	 : Remplace une data par une autre
- *		  [FIX]	   bb_queue_add_nth	 : fix de la longueur de la liste chaînée
- *			[ADD]		foreach_bb_queue_item : foreach implémenté pour la BbQueue
- *			[ADD]		break_foreach : la boucle foreach ne peut pas être breakée avec un simple "break". Il *faut* utiliser break_foreach.
- *
- *	  [+] v.1.4	   (07 / 02 / 2011)
- *		  [FIX]	   bb_queue_pop : Correction d'un bug de conception (!)
- *		  [FIX]	   bb_queue_pick_first : La macro a été implémentée en fonction pour raison de sécurité
- *
- *	  [+] v1.5		(12 / 03 / 2011)
- *		  [FIX]	   Pointeur "current" et fonctions associées (cf v1.2) deprecated, mauvaise conception et aucune utilité
- *		  [FIX]	   Fusion de BbQueue.c et BbChild.c pour des raisons pratiques
- *		  [ADD]	   bb_queue_add_array : transforme le tableau 1 dimension en BbQueue, en respectant l'ordre croissant
- *		  [ADD]	   bb_queue_copy : Copie une BbQueue
- *
- *	  [+] v1.6		(19 / 10 / 2011)
- *		  [FIX]	   Optimisation de bb_queue_insert_before/after
- *		  [ADD]	   bb_queue_insert_before/after_child()
- *		  [ADD]	   bb_queue_concat
- *			[ADD]		foreach_bb_queue_item_reversed
- *
- *	  [+] v1.7		(08 / 01 / 2012)
- *		  [FIX]	   Fix d'un bug mineur sur bb_queue_foreach_*
- *		  [ADD]	   bb_queue_put_last : prend un élément et le met à la fin, équivalent optimisé d'un remv + add
- *		  [ADD]	   bb_queue_put_first : prend un élément et le met au début, équivalent optimisé d'un remv + push
- *		  [ADD]	   bb_queue_concat_nth : concatène 2 BbQueue à partir de la position nth
- *		  [FIX]	   bb_queue_remv_nth : Dans le cas où la data "nth" existait en double dans la liste, la première rencontrée dans la liste était supprimée sans tenir compte du nthième
- *		  [FIX]	   bb_queue_add_nth : Le child n'était pas inséré à la bonne position, il y avait un offset de +1
- *		  [FIX]	   bb_queue_remv : Les pointeurs first et last n'étaient pas correctement remis à NULL si la taille de la bb_queue est égale à 1 avant remv
- *
- *
- *		[+] v1.8		(06 / 03 / 2012)
- *			[ADD]		bb_queue_pick_nth : accepte dorénavant les entiers négatifs pour deuxième argument; L'élément pické sera pris à partir de la fin de la BbQueue. (-1 renverra le dernier)
- *
- *
- */
-
-#ifndef bb_queue_H_INCLUDED
-#define bb_queue_H_INCLUDED
+#pragma once
 
 /* Dépendances */
 #include <stdio.h>
@@ -240,6 +164,7 @@ void
 bb_queue_init 					(BbQueue *q);
 
 // ----------- Methods ------------
+
 /* BbChild */
 BbChild *
 bb_child_get_next			   (BbChild *child);
@@ -389,6 +314,7 @@ void
 bb_queue_bubble_sort	   		(BbQueue *queue);
 
 // --------- Destructors ----------
+
 /* BbChild */
 void
 bb_child_unref				  (BbChild *child);
