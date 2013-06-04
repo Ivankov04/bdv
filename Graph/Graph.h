@@ -1,18 +1,10 @@
-/**
- *  @author		:	Spl3en (Moreau Cyril) <spl3en.contact@gmail.com>
- *  @file		:	Graph.h
- *  @version	:	1.0
- *  @date		:	2011-03-12-23.40
-*/
-
-#ifndef Graph_H_INCLUDED
-#define Graph_H_INCLUDED
+#pragma once
 
 /* Includes */
+#include "../BbQueue/BbQueue.h"
+
 #include <stdlib.h>
 #include <stdio.h>
-
-#include "../BbQueue/BbQueue.h"
 
 /*
     Note pour les structures suivantes :
@@ -21,7 +13,6 @@
         de différents algorithmes de la théorie des graphes ; Il n'est pas conseillé
         d'y toucher lors d'une utilisation de la librairie. user_data est là pour ça.
 */
-
 typedef
 struct _Vertex
 {
@@ -54,10 +45,7 @@ struct _Graph
 }	Graph;
 
 
-	/**=================
-		@Constructors
-	===================*/
-
+// --------- Constructors ---------
 Graph *
 graph_new 				(void);
 
@@ -68,10 +56,7 @@ GraphVertex *
 graph_vertex_new        (void);
 
 
-	/**=================
-		  @Methods
-	===================*/
-
+// ----------- Methods ------------
 GraphArc *
 graph_add_arc           (Graph *g, GraphVertex *from, GraphVertex *to);
 
@@ -81,10 +66,8 @@ graph_debug             (Graph *g);
 GraphArc *
 graph_vertex_get_arc    (GraphVertex *from, GraphVertex *to);
 
-	/**=================
-		@Destructors
-	===================*/
 
+// --------- Destructors ----------
 void
 graph_unref 			(Graph *p);
 

@@ -224,10 +224,7 @@ struct _BbQueue
 
 }	BbQueue;
 
-	/**=================
-		@Constructors
-	===================*/
-
+// --------- Constructors ---------
 /* BbChild */
 BbChild *
 bb_child_new					(void *data);
@@ -242,10 +239,7 @@ bb_queue_copy				   (BbQueue *queue);
 void
 bb_queue_init 					(BbQueue *q);
 
-	/**=================
-		  @Methods
-	===================*/
-
+// ----------- Methods ------------
 /* BbChild */
 BbChild *
 bb_child_get_next			   (BbChild *child);
@@ -394,10 +388,7 @@ bb_queue_put_last 				(BbQueue *queue, void *data);
 void
 bb_queue_bubble_sort	   		(BbQueue *queue);
 
-	/**=================
-		@Destructors
-	====================*/
-
+// --------- Destructors ----------
 /* BbChild */
 void
 bb_child_unref				  (BbChild *child);
