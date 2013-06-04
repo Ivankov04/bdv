@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ProjetSysteme" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ProjetSysteme" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ProjetSysteme" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Winit-self" />
+			<Add option="-Wredundant-decls" />
+			<Add option="-Wcast-align" />
+			<Add option="-Winline" />
+			<Add option="-Wswitch-enum" />
+			<Add option="-fgnu89-inline" />
+			<Add option="-std=gnu99" />
+			<Add option="-masm=intel" />
+			<Add option="-Wno-pointer-sign" />
+			<Add option="-Wno-pointer-to-int-cast" />
+		</Compiler>
+		<Linker>
+			<Add library="rt" />
+		</Linker>
+		<Unit filename="BbQueue/BbQueue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="BbQueue/BbQueue.h" />
+		<Unit filename="Event/Event.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Graph/Graph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Graph/Graph.h" />
+		<Unit filename="Projet/Ascenseur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Projet/Ascenseur.h" />
+		<Unit filename="Projet/BureauDeVote.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Projet/BureauDeVote.h" />
+		<Unit filename="Projet/Entity.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Projet/Entity.h" />
+		<Unit filename="Projet/Isoloirs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Projet/Isoloirs.h" />
+		<Unit filename="Projet/Lieu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Projet/Lieu.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
