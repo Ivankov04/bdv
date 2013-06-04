@@ -1,4 +1,4 @@
-bdv
-===
+Bureau de vote
+===============
 
 Isty project
