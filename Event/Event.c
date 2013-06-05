@@ -19,8 +19,8 @@ event_new (int ms_min, int ms_max)
 void
 event_init (Event *this, int ms_min, int ms_max)
 {
-	this->ms_min = ms_min / 10;
-	this->ms_max = ms_max / 10;
+	this->ms_min = ms_min;
+	this->ms_max = ms_max;
 }
 
 void
@@ -44,7 +44,7 @@ clock_t
 event_get_now ()
 {
     static struct tms buf;
-    return times(&buf);
+    return (times(&buf) * 10);
 }
 
 bool

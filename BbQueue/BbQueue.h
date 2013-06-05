@@ -328,5 +328,3 @@ bb_queue_free_all			   (BbQueue *queue, void (*free_func)());
 
 void
 bb_queue_clear				  (BbQueue *queue);
-
-#endif

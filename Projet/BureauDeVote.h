@@ -19,7 +19,8 @@ typedef struct _BureauDeVote
     BbQueue *entities;
 
 	Graph *graph;
-	Event *entityOnCreate;
+
+	Event *entity_on_create;
 
 	clock_t start;
 	int now;

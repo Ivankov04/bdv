@@ -32,7 +32,7 @@ typedef struct
 	BbQueue *entities;
 
 	// Autre implémentation
-	void *data;
+	void *user_data;
 
 }	Lieu;
 
@@ -40,17 +40,13 @@ typedef struct
 // --------- Constructors ---------
 
 Lieu *
-lieu_new (LieuType type, int duree_min, int duree_max, int max_capacity);
+lieu_new (LieuType type, int duree_min, int duree_max, int max_capacity, void *data);
 
 
 // ----------- Methods ------------
 
 void
-lieu_init (Lieu *lieu, LieuType type, int duree_min, int duree_max, int max_capacity);
-
-void
-lieu_set_data (Lieu *this, void *data);
-
+lieu_init (Lieu *this, LieuType type, int duree_min, int duree_max, int max_capacity, void *data);
 
 
 // --------- Destructors ----------

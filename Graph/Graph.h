@@ -53,7 +53,7 @@ GraphArc *
 graph_arc_new           (GraphVertex *from, GraphVertex *to);
 
 GraphVertex *
-graph_vertex_new        (void);
+graph_vertex_new        (void *user_data);
 
 
 // ----------- Methods ------------
@@ -70,5 +70,3 @@ graph_vertex_get_arc    (GraphVertex *from, GraphVertex *to);
 // --------- Destructors ----------
 void
 graph_unref 			(Graph *p);
-
-#endif

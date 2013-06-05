@@ -7,6 +7,8 @@
 #ifndef TRUE
 #define TRUE 1
 #define FALSE 0
+#endif
+#ifndef bool
 #define bool char
 #endif
 

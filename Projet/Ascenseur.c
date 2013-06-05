@@ -17,9 +17,9 @@ ascenseur_new (void)
 void
 ascenseur_init (Ascenseur *this)
 {
-	this->lv1 = lieu_new(ETAGE_ASCENSEUR, 3, 3, 2);
-	this->lv2 = lieu_new(ETAGE_ASCENSEUR, 3, 3, 2);
-	this->lv3 = lieu_new(ETAGE_ASCENSEUR, 3, 3, 2);
+	this->lv1 = lieu_new(ETAGE_ASCENSEUR, 3, 3, 2, NULL);
+	this->lv2 = lieu_new(ETAGE_ASCENSEUR, 3, 3, 2, NULL);
+	this->lv3 = lieu_new(ETAGE_ASCENSEUR, 3, 3, 2, NULL);
 
 	this->cur = this->lv1;
 }

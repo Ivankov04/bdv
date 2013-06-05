@@ -44,7 +44,7 @@ graph_arc_new (GraphVertex *from, GraphVertex *to)
 
 // GraphVertex
 GraphVertex *
-graph_vertex_new (void)
+graph_vertex_new (void *user_data)
 {
     GraphVertex *v = (GraphVertex *) malloc (sizeof(GraphVertex));
 
@@ -53,7 +53,7 @@ graph_vertex_new (void)
 
     v->arcs = bb_queue_new();
 
-    v->user_data  = NULL;
+    v->user_data  = user_data;
     v->_impl_data = NULL;
 
     return v;
