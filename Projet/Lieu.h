@@ -2,8 +2,13 @@
 
 // ---------- Includes ------------
 #include "../BbQueue/BbQueue.h"
+#include "./Entity.h"
 
 // ---------- Defines -------------
+#define LIEU_METHODS(e) (void *(*)(Lieu *)) e##_new, (void (*)(void *)) e##_update
+
+// ------ Class declaration -------
+
 typedef enum {
 
 	ENTREE_SORTIE,
@@ -18,7 +23,6 @@ typedef enum {
 } LieuType;
 
 
-// ------ Class declaration -------
 typedef struct
 {
 	LieuType type;
@@ -27,31 +31,32 @@ typedef struct
 	int duree_min;
 	int duree_max;
 
-	// Maximum d'entité
+	// Maximum d'entités
 	int max_capacity;
 	BbQueue *entities;
 
-	// Autre implémentation
+	// Autres implémentations
 	void *user_data;
+	void (*update)(void *);
+
+	// Informations affichage
+	char *nom;
 
 }	Lieu;
 
 
 // --------- Constructors ---------
 
-Lieu *
-lieu_new (LieuType type, int duree_min, int duree_max, int max_capacity, void *data);
-
+Lieu *lieu_new (LieuType type, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg));
 
 // ----------- Methods ------------
 
-void
-lieu_init (Lieu *this, LieuType type, int duree_min, int duree_max, int max_capacity, void *data);
-
+void lieu_init          (Lieu *this, LieuType type, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg));
+void lieu_add_entity    (Lieu *this, Entity *entity);
+void lieu_update        (Lieu *this);
 
 // --------- Destructors ----------
 
-void
-lieu_free (Lieu *lieu);
+void lieu_free (Lieu *lieu);
 
 

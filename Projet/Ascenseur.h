@@ -13,8 +13,8 @@ typedef struct _Ascenseur
 	Lieu *lv1;
 	Lieu *lv2;
 	Lieu *lv3;
-
 	Lieu *cur;
+	Lieu *father;
 
 }	Ascenseur;
 
@@ -23,12 +23,15 @@ typedef struct _Ascenseur
 // --------- Constructors ---------
 
 Ascenseur *
-ascenseur_new (void);
+ascenseur_new (Lieu *father);
+
+void
+ascenseur_update (Ascenseur *this);
 
 
 // ----------- Methods ------------
 void
-ascenseur_init (Ascenseur *ascenseur);
+ascenseur_init (Ascenseur *ascenseur, Lieu *father);
 
 
 

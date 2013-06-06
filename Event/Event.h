@@ -47,9 +47,10 @@ event_pulse (Event *this, int elapsed);
 bool
 event_update (Event *this);
 
-clock_t
-event_get_now ();
+clock_t event_get_now ();
 
+void event_restart (Event **pthis, int ms_min, int ms_max, clock_t now);
+void event_restart_now (Event **pthis, int ms_min, int ms_max);
 
 // --------- Destructors ----------
 

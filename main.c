@@ -5,8 +5,8 @@ int main()
 {
     srand(time(NULL));
 
-	bureau_init(MAX_ENTITIES_IN_BDV);
-    bureau_main();
+	bdv_init(MAX_ENTITIES_IN_BDV);
+    bdv_main();
 
     return 0;
 }

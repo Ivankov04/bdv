@@ -7,9 +7,11 @@
 #include "./Ascenseur.h"
 #include "./Isoloirs.h"
 #include "./Entity.h"
+#include "./Entree.h"
 
 // ---------- Defines -------------
-#define MAX_ENTITIES_IN_BDV 11
+#define MAX_ENTITIES_IN_BDV 1
+#define PATH_SIZE           9
 
 // ------ Class declaration -------
 typedef struct _BureauDeVote
@@ -17,15 +19,22 @@ typedef struct _BureauDeVote
     int max_capacity;
 
     BbQueue *entities;
-
-	Graph *graph;
-
 	Event *entity_on_create;
 
 	clock_t start;
 	int now;
 
 	bool alive;
+
+	// Lieux
+	Lieu *entree,
+		 *secretariat,
+		 *bureau,
+		 *isoloirs,
+		 *assesseur,
+		 *ascenseur;
+
+    Lieu **chemin;
 
 }	BureauDeVote;
 
@@ -37,13 +46,16 @@ unsigned long int entity_generated;
 // ----------- Methods ------------
 
 void
-bureau_init (int max_entities);
+bdv_init (int max_entities);
 
 void
-bureau_update ();
+bdv_update ();
 
 void
-bureau_main ();
+bdv_main ();
+
+void
+bdv_give_path (Entity *entity);
 
 
 // --------- Destructors ----------

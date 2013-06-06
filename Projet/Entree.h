@@ -4,33 +4,40 @@
 #include "./Lieu.h"
 
 // ---------- Defines -------------
-#define ISOLOIRS_NB_CABINES 4
+
 
 // ------ Class declaration -------
-typedef struct _Isoloirs
+typedef struct _Entree
 {
-	Lieu *isoloirs[ISOLOIRS_NB_CABINES];
-	Lieu *father;
+    // Entree hérite de Lieu
+    Lieu *father;
 
-}	Isoloirs;
+
+
+
+
+}	Entree;
 
 
 
 // --------- Constructors ---------
 
-Isoloirs *
-isoloirs_new (Lieu *lieu);
+Entree *
+entree_new (Lieu *lieu);
 
 
 // ----------- Methods ------------
 void
-isoloirs_init (Isoloirs *isoloirs, Lieu *lieu);
+entree_init (Entree *this, Lieu *lieu);
 
 void
-isoloirs_update (Isoloirs *isoloirs);
+entree_update (Entree *entree);
+
 
 
 // --------- Destructors ----------
 
 void
-isoloirs_free (Isoloirs *isoloirs);
+entree_free (Entree *entree);
+
+
