@@ -8,6 +8,7 @@
 #include "./Isoloirs.h"
 #include "./Entity.h"
 #include "./Entree.h"
+#include "./Secretariat.h"
 
 // ---------- Defines -------------
 #define MAX_ENTITIES_IN_BDV 1
@@ -57,5 +58,7 @@ bdv_main ();
 void
 bdv_give_path (Entity *entity);
 
+clock_t
+bdv_get_ticks ();
 
 // --------- Destructors ----------

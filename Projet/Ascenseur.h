@@ -5,16 +5,20 @@
 
 
 // ---------- Defines -------------
-
+#define LVL0_LVL1 2
+#define LVL1_LVL2 4
+#define LVL2_LVL0 6
 
 // ------ Class declaration -------
 typedef struct _Ascenseur
 {
-	Lieu *lv1;
-	Lieu *lv2;
-	Lieu *lv3;
-	Lieu *cur;
 	Lieu *father;
+
+	Lieu *level[3];
+	Lieu *cur;
+	Lieu *dest;
+
+	BbQueue *entities_inside;
 
 }	Ascenseur;
 

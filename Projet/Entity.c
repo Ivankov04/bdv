@@ -7,6 +7,7 @@
 #include <pthread.h>
 
 static unsigned long long int id = 0;
+
 static void entity_update (Entity *this);
 static void entity_main (Entity *this);
 
@@ -19,20 +20,18 @@ static void entity_update (Entity *this)
         {
             if (this->walking == FALSE)
             {
-                printf("(%lu) Je marche pendant 3s\n", this->id);
+                applog("Entité", "%lu - marche vers la prochaine destination", this->id);
                 this->walking = TRUE;
-
-                event_free(this->wakeup);
-                this->wakeup = event_new(3000, 3000); // 3s pour aller au prochain point
-                event_start_now(this->wakeup);
+                event_restart_now(&this->wakeup, 3000, 3000); // 3s pour aller au prochain point
             }
 
             else
             {
                 event_free(this->wakeup);
                 this->id_path++;
-                this->ready = TRUE;
-                this->wakeup = NULL;
+                this->ready   = TRUE;
+                this->wakeup  = NULL;
+                this->walking = FALSE;
             }
         }
     }
@@ -40,19 +39,20 @@ static void entity_update (Entity *this)
 
 static void entity_main (Entity *this)
 {
+    entity_lock(this);
+
     while (this->alive)
     {
+        entity_unlock(this);
+
         usleep(1000 * 100);
 
         entity_lock(this);
         entity_update(this);
-        entity_unlock(this);
     }
 
-    // Auto destruction
-    entity_free(this);
+    entity_unlock(this);
 }
-
 
 /* Fonctions publiques */
 void entity_lock (Entity *this)
@@ -77,15 +77,14 @@ Entity *entity_new (void)
 	return this;
 }
 
-bool entity_died (Entity *this)
+bool entity_is_dead (Entity *this)
 {
-    if (this->alive == FALSE && this->start > 0);
+    return (this->alive == FALSE && this->start > 0);
 }
 
 void entity_init (Entity *this)
 {
     this->thread = thread_new((void(*)(void *))entity_main, this);
-
     memset(&this->mutex, 0, sizeof(pthread_mutex_t));
 }
 
@@ -98,13 +97,15 @@ void entity_make_alive (Entity *this)
     this->id_path = 0;
 
     thread_create(this->thread);
-    applog("Entité thread=%llu crée", id++);
+    applog("Entité", "%llu - crée", id++);
 }
 
-void entity_free (Entity *entity)
+void entity_free (Entity *e)
 {
-	if (entity != NULL)
+	if (e != NULL)
 	{
-		free (entity);
+	    event_free(e->wakeup);
+        thread_exit(e->thread);
+		free (e);
 	}
 }

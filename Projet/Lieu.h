@@ -35,6 +35,9 @@ typedef struct
 	int max_capacity;
 	BbQueue *entities;
 
+	// Etage du lieu
+	int etage;
+
 	// Autres implémentations
 	void *user_data;
 	void (*update)(void *);
@@ -47,13 +50,14 @@ typedef struct
 
 // --------- Constructors ---------
 
-Lieu *lieu_new (LieuType type, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg));
+Lieu *lieu_new (LieuType type, int etage, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg));
 
 // ----------- Methods ------------
 
-void lieu_init          (Lieu *this, LieuType type, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg));
+void lieu_init          (Lieu *this, LieuType type, int etage, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg));
 void lieu_add_entity    (Lieu *this, Entity *entity);
 void lieu_update        (Lieu *this);
+bool lieu_plein         (Lieu *this);
 
 // --------- Destructors ----------
 

@@ -8,4 +8,4 @@
 
 
 // ----------- Methods ------------
-void applog (char *format, ...);
+void applog (char *who, char *format, ...);

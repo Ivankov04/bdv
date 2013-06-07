@@ -15,9 +15,10 @@ typedef struct _Entity
 	clock_t start;
     bool alive;
     bool ready;
-
     bool walking;
-    int  id_path;
+
+    int id_path;
+    int etage;
 
     Thread *thread;
     Event *wakeup;
@@ -33,7 +34,7 @@ Entity *entity_new ();
 // ----------- Methods ------------
 void entity_init (Entity *entity);
 void entity_make_alive (Entity *this);
-bool entity_is_dead (Entity *e);
+bool entity_is_dead (Entity *this);
 
 
 void entity_lock (Entity *this);

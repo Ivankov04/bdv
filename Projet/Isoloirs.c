@@ -19,7 +19,7 @@ isoloirs_init (Isoloirs *this, Lieu *lieu)
 {
 	for (int i = 0; i < ISOLOIRS_NB_CABINES; i++)
 	{
-		this->isoloirs[i] = lieu_new(ISOLOIR, 7, 10, 1, NULL, NULL);
+		this->isoloirs[i] = lieu_new(ISOLOIR, lieu->etage, 7, 10, 1, NULL, NULL);
 	}
 
 	this->father = lieu;

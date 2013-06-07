@@ -2,22 +2,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char *lieux_nom[] = {"Entree/Sortie", "Secretariat", "Bureau du président", "Isoloirs", "Un Isoloir", "Assesseur", "Ascenseur", "Etage ascenseur"};
+static const char *lieux_nom[] = {"Entree/Sortie", "Secretariat", "Bureau du président", "Isoloirs", "Un Isoloir", "Assesseur", "Ascenseur", "Etage ascenseur"};
 
 Lieu *
-lieu_new (LieuType type, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg))
+lieu_new (LieuType type, int etage, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg))
 {
 	Lieu *this;
 
 	if ((this = calloc(1, sizeof(Lieu))) == NULL)
 		return NULL;
 
-	lieu_init(this, type, duree_min, duree_max, max_capacity, constructor, update);
+	lieu_init(this, type, etage, duree_min, duree_max, max_capacity, constructor, update);
 
 	return this;
 }
 
-void lieu_init (Lieu *this, LieuType type, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg))
+void lieu_init (Lieu *this, LieuType type, int etage, int duree_min, int duree_max, int max_capacity, void *(*constructor)(Lieu *), void (*update)(void *arg))
 {
 	this->type = type;
 	this->duree_min = duree_min;
@@ -25,11 +25,17 @@ void lieu_init (Lieu *this, LieuType type, int duree_min, int duree_max, int max
 	this->max_capacity = max_capacity;
 	this->entities = bb_queue_new();
 	this->update = update;
+	this->etage = etage;
+    this->nom = (char *) lieux_nom[(int)type];
 
 	if (constructor != NULL)
         this->user_data = constructor(this);
+}
 
-    this->nom = lieux_nom[(int)type];
+bool
+lieu_plein (Lieu *this)
+{
+    return (bb_queue_get_length(this->entities) > this->max_capacity);
 }
 
 void
